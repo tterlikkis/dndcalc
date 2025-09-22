@@ -1,32 +1,48 @@
 .theme-dark {
-  --dark-text: #292929;
-  --light-text: #F9F8F8;  
-  --dark-background: #2F4550;
-  --light-background: #586F7C;
-  --accent: #B8DBD9;
-  --button-border: #B8DBD9;
+  --background: #181a1b;
+  --foreground: #202324;
+  --text: #e8e6e3;
+  --button-background: #2b2a33;
+  --button-hover-background: #52525e;
 }
 
 .theme-light {
-  --dark-text: #5E4B56;
-  --light-text: #5E4B56;
-  --dark-background: #DBE7E4;
-  --light-background: #EDDCD2;
-  --accent: #DBE7E4;
-  --button-border: #5E4B56;
+  --background: #ffffff;
+  --foreground: #cccccc;
+  --text: #000022;
+  --button-background: #e9e9ed;
+  --button-hover-background: #d0d0d7;
 }
-
 
 html, #root {
-  background-color: var(--dark-background);
-  color: var(--dark-text);
+  background-color: var(--background);
+  color: var(--text);
 }
 
-nav {
-  background-color: var(--dark-background);
-  color: var(--light-text);
+input {
+  background-color: var(--button-background);
+  outline: none;
+  border: 1px solid #8f8f9d;
+  border-radius: 2px;
+  color: var(--text);
 }
 
-.main-container {
-  background-color: var(--light-background);
+select {
+  background-color: var(--button-background);
+  outline: none;
+  border: 1px solid #8f8f9d;
+  border-radius: 2px;
+  color: var(--text);
+}
+
+button {
+  background-color: var(--button-background);
+  outline: none;
+  border: 1px solid #8f8f9d;
+  border-radius: 2px;
+  color: var(--text);
+}
+
+button:hover {
+  background-color: var(--button-hover-background);
 }

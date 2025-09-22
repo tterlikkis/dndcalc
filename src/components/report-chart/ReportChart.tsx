@@ -5,29 +5,33 @@ import { RollConfig } from "../../models/RollConfig.class";
 import "./ReportChart.css"
 import { AttackConfig } from "../../models/AttackConfig.interface";
 import { round } from "../../utilities/round";
+import { sum } from "../../utilities/sum";
+import { useMemo, useState } from "react";
 
-export function ReportChart({ attacks, roundCount, minAc, maxAc }: ReportChartInput) {
+const chartWidth = 650;
+const colors: string[] = [
+  "red",
+  "blue",
+  "green",
+  "purple",
+  "orange",
+  "brown",
+  "pink"
+];
 
-  const chartWidth = 650;
+export function ReportChart({ showCharts, attacks, roundCount, minAc, maxAc }: ReportChartInput) {
 
-  const colors: string[] = [
-    "red",
-    "blue",
-    "yellow",
-    "green",
-    "purple",
-    "orange",
-    "black",
-    "brown",
-    "pink"
-  ];
+  const [showTotalDamage, setShowTotalDamage] = useState(false);
+  const chartData = useMemo(initialData, [attacks, roundCount, minAc, maxAc]);
 
-  const chartData = initialData();
+  function handleShowTotalDamageChange() {
+    setShowTotalDamage(!showTotalDamage);
+  }
 
-  function initialData() {
-    let entries: ReportChartEntry[] = [];
+  function initialData(): ReportChartEntry[] {
+    const entries: ReportChartEntry[] = [];
     for (let i = minAc; i <= maxAc; i++) {
-      let entry: ReportChartEntry = { ac: i };
+      const entry: ReportChartEntry = { ac: i };
       const averageDamages: number[] = [];
       attacks.forEach(a => {
         const [averageDamage, hitPercentage] = rollAttack(i, a);
@@ -35,6 +39,9 @@ export function ReportChart({ attacks, roundCount, minAc, maxAc }: ReportChartIn
         entry[`hitPercentage${a.id}`] = hitPercentage;
         averageDamages.push(averageDamage);
       });
+      if (attacks.length > 1) {
+        entry['averageDamage'] = round(sum(averageDamages));
+      }
       entries.push(entry);
     }
     return entries;
@@ -54,54 +61,66 @@ export function ReportChart({ attacks, roundCount, minAc, maxAc }: ReportChartIn
     ];
   }
 
+  if (!showCharts) return null;
+
   return (
     <div className="chart-column">
-      <div className="chart-title">Damager Per Round</div>
+      <div className="chart-title">
+        <div className="title-text">Damager Per Round</div>
+        {
+          attacks.length > 1
+          ? (
+            <label>
+              Display Round Total
+              <input type="checkbox" checked={showTotalDamage} onClick={handleShowTotalDamageChange} />
+            </label>
+          )
+          : null
+        }
+      </div>
       <LineChart width={chartWidth} height={200} data={chartData}>
         <CartesianGrid />
         {attacks.map((attack, index) =>
-          <>
-            <Line 
-              dataKey={`averageDamage${attack.id}`} 
-              type="monotone" 
-              stroke={colors[index % colors.length]} 
-              strokeWidth={2} 
-              name={`Attack ${index+1} Avg Dmg per Round`}
-            ></Line>     
-          </>
-
+          <Line 
+            dataKey={`averageDamage${attack.id}`} 
+            type="monotone" 
+            stroke={colors[index % colors.length]} 
+            strokeWidth={2} 
+            name={`Attack ${index+1} Avg Dmg per Round`}
+          ></Line>     
         )}
         {
-          attacks.length > 1 
+          attacks.length > 1 && showTotalDamage
           ? (
             <Line
               dataKey="averageDamage"
               type="monotone"
-              stroke="black"
+              stroke="grey"
               strokeWidth={2}
               name="Total Avg Dmg per Round"
             ></Line>
           )
           : null
-
         }
-        <XAxis dataKey="ac" height={60} label={{ value: 'AC', position: 'center' }} />
+        <XAxis dataKey="ac" />
         <YAxis />
         <Tooltip />
       </LineChart>
-      <div className="chart-title">Hit Percentage</div>
+      <div className="chart-title">
+        <div className="title-text">Hit Percentage</div>
+      </div>
       <LineChart width={chartWidth} height={200} data={chartData}>
         <CartesianGrid />
         {attacks.map((attack, index) =>
           <Line 
             dataKey={`hitPercentage${attack.id}`} 
             type="monotone" 
-            stroke={colors[index + 3 % colors.length]} 
+            stroke={colors[index + 2 % colors.length]} 
             strokeWidth={2} 
             name={`Attack ${index+1} Hit Percentage`}
           ></Line>
         )}
-        <XAxis dataKey="ac" height={60} label={{ value: 'AC', position: 'center' }} />
+        <XAxis dataKey="ac" />
         <YAxis />
         <Tooltip />
       </LineChart>

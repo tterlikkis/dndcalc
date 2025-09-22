@@ -90,11 +90,7 @@ export function Scenario() {
           <Attack attackConfig={attack} onUpdate={updateAttack} onDelete={deleteAttack}></Attack>
         )}
       </div>  
-      {
-        showCharts
-        ? <ReportChart attacks={attacks} roundCount={roundCount} minAc={minAc} maxAc={maxAc} />
-        : null
-      }
+      <ReportChart showCharts={showCharts} attacks={attacks} roundCount={roundCount} minAc={minAc} maxAc={maxAc} />
     </>
   );
 }

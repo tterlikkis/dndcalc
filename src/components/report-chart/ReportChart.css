@@ -2,10 +2,18 @@
   display: flex;
   flex-direction: column;
   width: 650px;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .chart-title {
   width: 100%;
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-text {
+  margin-left: 4rem;
+  width: fit-content;
 }
