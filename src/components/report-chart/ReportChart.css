@@ -1,0 +1,11 @@
+.chart-column {
+  display: flex;
+  flex-direction: column;
+  width: 650px;
+  margin-top: 0.5rem;
+}
+
+.chart-title {
+  width: 100%;
+  text-align: center;
+}
