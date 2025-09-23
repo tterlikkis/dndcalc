@@ -61,7 +61,7 @@ export function Attack({ attackConfig, onUpdate, onDelete }: AttackInput) {
           onDelete={deleteDamageRoll}
         ></RollBox>  
       )}
-      <div className="col">
+      <div className="attack-col">
         <button onClick={createDamageRoll}>Add Damage Roll</button>
         <button onClick={deleteAttack}>Remove Attack</button>
       </div>

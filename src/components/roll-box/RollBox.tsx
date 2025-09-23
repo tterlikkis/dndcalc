@@ -3,21 +3,19 @@ import { RollBoxInput } from "./RollboxInput.interface";
 import { RollType } from "../../models/RollType.enum";
 import { DamageType } from "../../models/DamageType.enum";
 
+const diceSizes = new Map<string, number>([
+  ['d4', 4], 
+  ['d6', 6], 
+  ['d8', 8], 
+  ['d10', 10], 
+  ['d12', 12], 
+  ['d20', 20], 
+  ['d100', 100]
+]);
+
+const damageTypes = Object.entries(DamageType).filter(([_, value]) => typeof value !== 'number');
+
 export function RollBox({ rollConfig, onUpdate, onDelete }: RollBoxInput) {
-
-  console.log(rollConfig.damage)
-
-  const diceSizes = new Map<string, number>([
-    ['d4', 4], 
-    ['d6', 6], 
-    ['d8', 8], 
-    ['d10', 10], 
-    ['d12', 12], 
-    ['d20', 20], 
-    ['d100', 100]
-  ]);
-
-  const damageTypes = Object.entries(DamageType).filter(([_, value]) => typeof value !== 'number')
 
   function handleAdvantageChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.currentTarget.checked;

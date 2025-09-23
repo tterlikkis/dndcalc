@@ -1,7 +1,7 @@
 .chart-column {
   display: flex;
   flex-direction: column;
-  width: 650px;
+  width: 600px;
   margin-top: 1rem;
 }
 

@@ -24,7 +24,7 @@ export function ThemeToggle() {
   }
 
   return (
-    <label className="toggle">
+    <label>
       Dark Mode
       <input type="checkbox" id="toggle" checked={isDarkMode} onClick={handleOnClick} />
     </label>

@@ -46,3 +46,22 @@ button {
 button:hover {
   background-color: var(--button-hover-background);
 }
+
+.app-row {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.app-round {
+  flex: 1;
+}
+
+.app-settings-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}

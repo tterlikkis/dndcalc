@@ -8,7 +8,7 @@ import { round } from "../../utilities/round";
 import { sum } from "../../utilities/sum";
 import { useMemo, useState } from "react";
 
-const chartWidth = 650;
+const chartWidth = 600;
 const colors: string[] = [
   "red",
   "blue",
