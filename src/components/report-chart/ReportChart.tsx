@@ -82,6 +82,7 @@ export function ReportChart({ showCharts, attacks, roundCount, minAc, maxAc }: R
         <CartesianGrid />
         {attacks.map((attack, index) =>
           <Line 
+            key={attack.id}
             dataKey={`averageDamage${attack.id}`} 
             type="monotone" 
             stroke={colors[index % colors.length]} 
@@ -113,6 +114,7 @@ export function ReportChart({ showCharts, attacks, roundCount, minAc, maxAc }: R
         <CartesianGrid />
         {attacks.map((attack, index) =>
           <Line 
+            key={attack.id}
             dataKey={`hitPercentage${attack.id}`} 
             type="monotone" 
             stroke={colors[index + 2 % colors.length]} 

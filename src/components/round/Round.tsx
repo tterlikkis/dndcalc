@@ -40,7 +40,7 @@ export function Round({ roundCount, minAc, maxAc }: RoundInput) {
       </div>
       <div className="round-col">
         {attacks.map(attack =>
-          <Attack attackConfig={attack} onUpdate={updateAttack} onDelete={deleteAttack}></Attack>
+          <Attack key={attack.id} attackConfig={attack} onUpdate={updateAttack} onDelete={deleteAttack}></Attack>
         )}
       </div>  
       <ReportChart showCharts={showCharts} attacks={attacks} roundCount={roundCount} minAc={minAc} maxAc={maxAc} />
