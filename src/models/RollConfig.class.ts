@@ -1,4 +1,5 @@
 import { DamageType } from "./DamageType.enum";
+import { RollResult } from "./RollResult";
 import { RollType } from "./RollType.enum";
 
 export class RollConfig {
@@ -25,7 +26,7 @@ export class RollConfig {
     }
   }
 
-  static roll(r: RollConfig): number {
+  static roll(r: RollConfig): RollResult {
     let total = 0;
     const count = r.count || 0;
     const dice = r.dice || 0;
@@ -41,7 +42,11 @@ export class RollConfig {
         total += Math.ceil(Math.random() * dice)
       }
     }
-    return total + bonus;
+    return {
+      base: total,
+      bonus: bonus,
+      total: total + bonus
+    };
   }
 
 }

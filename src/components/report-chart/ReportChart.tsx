@@ -48,11 +48,24 @@ export function ReportChart({ showCharts, attacks, roundCount, minAc, maxAc }: R
   }
 
   function rollAttack(ac: number, attack: AttackConfig): [number, number] {
-    const totals = Array.from(Array(roundCount).keys()).map(() =>
-      RollConfig.roll(attack.attackRoll) < ac 
-        ? -1 
-        : attack.damageRolls.reduce((acc, curr) => acc + RollConfig.roll(curr), 0) 
-    );
+    const totals = Array.from(Array(roundCount).keys()).map(() => {
+      const roll = RollConfig.roll(attack.attackRoll);
+      // Crit success
+      if (roll.base === attack.attackRoll.dice) {
+        return attack.damageRolls.reduce((acc, curr) => 
+          acc + RollConfig.roll(curr).total + RollConfig.roll(curr).total, 
+          0
+        );
+      }
+      // Crit fail or miss
+      else if (roll.base === 1 || roll.total < ac) {
+        return -1;
+      }
+      // Hit
+      else {
+        return attack.damageRolls.reduce((acc, curr) => acc + RollConfig.roll(curr).total, 0);
+      }
+    });
     const hits = totals.filter(t => t !== -1);
     const totalDamage = hits.reduce((acc, curr) => acc + curr, 0);
     return [
