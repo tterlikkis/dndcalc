@@ -53,7 +53,7 @@ export function ReportChart({ showCharts, attacks, roundCount, minAc, maxAc }: R
       // Crit success
       if (roll.base === attack.attackRoll.dice) {
         return attack.damageRolls.reduce((acc, curr) => 
-          acc + RollConfig.roll(curr).total + RollConfig.roll(curr).total, 
+          acc + RollConfig.roll(curr).base + RollConfig.roll(curr).total, 
           0
         );
       }
