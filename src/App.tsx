@@ -69,9 +69,9 @@ export default function App() {
         <div className="app-round">
           <Round roundCount={roundCount} minAc={minAc} maxAc={maxAc}></Round>
         </div>
-        <div className="app-round">
+        {/* <div className="app-round">
           <Round roundCount={roundCount} minAc={minAc} maxAc={maxAc}></Round>
-        </div>
+        </div> */}
       </div>
     </>
   );

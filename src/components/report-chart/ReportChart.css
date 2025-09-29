@@ -5,6 +5,12 @@
   margin-top: 1rem;
 }
 
+.chart-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
 .chart-title {
   width: 100%;
   display: flex;
@@ -13,7 +19,20 @@
   align-items: center;
 }
 
-.title-text {
+.chart-title-text {
   margin-left: 4rem;
   width: fit-content;
+}
+
+.chart-table {
+  margin-top: 1.4rem;
+}
+
+table, th, td {
+  border: 1px solid var(--text);
+  border-collapse: collapse;
+}
+
+td {
+  text-align: center;
 }

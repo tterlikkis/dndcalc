@@ -7,7 +7,7 @@ import { RoundInput } from "./RoundInput.interface";
 
 export function Round({ roundCount, minAc, maxAc }: RoundInput) {
 
-  const [showCharts, setShowCharts] = useState(false);
+  const [showResults, setshowResults] = useState(false);
 
   const [attacks, setAttacks] = useState<AttackConfig[]>([new AttackConfig()]);
 
@@ -24,7 +24,7 @@ export function Round({ roundCount, minAc, maxAc }: RoundInput) {
   }
 
   function toggleCharts() {
-    setShowCharts(!showCharts);
+    setshowResults(!showResults);
   }
 
   function updateAttack(attack: AttackConfig) {
@@ -36,14 +36,14 @@ export function Round({ roundCount, minAc, maxAc }: RoundInput) {
       <div className="round-row">
         <button onClick={createAttack}>Add Attack</button>
         <button onClick={reset}>Reset</button>
-        <button onClick={toggleCharts}>{showCharts ? 'Hide Charts' : 'Show Charts'}</button>
+        <button onClick={toggleCharts}>{showResults ? 'Hide Results' : 'Show Results'}</button>
       </div>
       <div className="round-col">
         {attacks.map(attack =>
           <Attack key={attack.id} attackConfig={attack} onUpdate={updateAttack} onDelete={deleteAttack}></Attack>
         )}
       </div>  
-      <ReportChart showCharts={showCharts} attacks={attacks} roundCount={roundCount} minAc={minAc} maxAc={maxAc} />
+      <ReportChart showResults={showResults} attacks={attacks} roundCount={roundCount} minAc={minAc} maxAc={maxAc} />
     </div>
   );
 }

@@ -26,7 +26,7 @@ export function ThemeToggle() {
   return (
     <label>
       Dark Mode
-      <input type="checkbox" id="toggle" checked={isDarkMode} onClick={handleOnClick} />
+      <input type="checkbox" id="toggle" checked={isDarkMode} onChange={handleOnClick} />
     </label>
   );
 
