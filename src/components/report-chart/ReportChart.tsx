@@ -203,7 +203,5 @@ export function ReportChart({ showResults, attacks, roundCount, minAc, maxAc }: 
         </table>
       </div>
     </div>
-
-
   );
 }
