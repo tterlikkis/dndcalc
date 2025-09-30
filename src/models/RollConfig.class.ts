@@ -1,4 +1,5 @@
 import { DamageType } from "./DamageType.enum";
+import { RollModifier } from "./RollModifier.enum";
 import { RollResult } from "./RollResult";
 import { RollType } from "./RollType.enum";
 
@@ -10,11 +11,13 @@ export class RollConfig {
   dice?: number;
   bonus?: number;
   damage?: DamageType;
-  advantage: boolean = false;
+  modifier: RollModifier;
+  // advantage: boolean = false;
 
   constructor(type?: RollType) {
     this.id = crypto.randomUUID();
     this.type = type || RollType.attack;
+    this.modifier = RollModifier.Normal;
     if (this.type == RollType.attack) {
       this.count = 1;
       this.dice = 20;
@@ -31,8 +34,14 @@ export class RollConfig {
     const count = r.count || 0;
     const dice = r.dice || 0;
     const bonus = r.bonus || 0;
-    if (r.advantage) {
+    if (r.modifier === RollModifier.Advantage) {
       total += Math.max(
+        Math.ceil(Math.random() * dice),
+        Math.ceil(Math.random() * dice)
+      );
+    }
+    else if (r.modifier === RollModifier.Disadvantage) {
+      total += Math.min(
         Math.ceil(Math.random() * dice),
         Math.ceil(Math.random() * dice)
       );

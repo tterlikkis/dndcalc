@@ -3,6 +3,8 @@ import { RollBoxInput } from "./RollboxInput.interface";
 import { RollType } from "../../models/RollType.enum";
 import { DamageType } from "../../models/DamageType.enum";
 import { BsFillTrash3Fill } from "react-icons/bs";
+import { RollModifier } from "../../models/RollModifier.enum";
+import { RollConfig } from "../../models/RollConfig.class";
 
 const diceSizes = new Map<string, number>([
   ['d4', 4], 
@@ -15,22 +17,23 @@ const diceSizes = new Map<string, number>([
 ]);
 
 const damageTypes = Object.entries(DamageType).filter(([_, value]) => typeof value !== 'number');
+const rollModifiers = Object.entries(RollModifier).filter(([_, value]) => typeof value !== 'number');
 
 export function RollBox({ rollConfig, onUpdate, onDelete }: RollBoxInput) {
 
-  function handleAdvantageChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = e.currentTarget.checked;
-    const newRollConfig = {
+  function handleAdvantageChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const value = Number.parseInt(e.currentTarget.value);
+    const newRollConfig: RollConfig = {
       ...rollConfig,
-      advantage: value,
-      count: value ? 1 : rollConfig.count
+      modifier: value,
+      count: value === RollModifier.Normal ? rollConfig.count : 1
     };
     onUpdate(newRollConfig);
   }
 
   function handleBonusChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.currentTarget.value;
-    const newRollConfig = {
+    const newRollConfig: RollConfig = {
       ...rollConfig,
       bonus: Number.parseInt(value)
     };
@@ -39,7 +42,7 @@ export function RollBox({ rollConfig, onUpdate, onDelete }: RollBoxInput) {
 
   function handleCountChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.currentTarget.value;
-    const newRollConfig = {
+    const newRollConfig: RollConfig = {
       ...rollConfig,
       count: Number.parseInt(value)
     };
@@ -48,16 +51,16 @@ export function RollBox({ rollConfig, onUpdate, onDelete }: RollBoxInput) {
 
   function handleDamageChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const value = e.currentTarget.value;
-    const newRollConfig = {
+    const newRollConfig: RollConfig = {
       ...rollConfig,
-      damage: value
+      damage: Number.parseInt(value)
     };
     onUpdate(newRollConfig);
   }
 
   function handleDiceChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const value = e.currentTarget.value;
-    const newRollConfig = {
+    const newRollConfig: RollConfig = {
       ...rollConfig,
       dice: Number.parseInt(value)
     };
@@ -78,7 +81,7 @@ export function RollBox({ rollConfig, onUpdate, onDelete }: RollBoxInput) {
           value={rollConfig.count} 
           onChange={handleCountChange}
           className="count-input"
-          readOnly={rollConfig.advantage}
+          readOnly={rollConfig.modifier !== RollModifier.Normal}
         />
         <select value={rollConfig.dice} onChange={handleDiceChange}>
           {Array.from(diceSizes.keys()).map(key => (
@@ -96,14 +99,19 @@ export function RollBox({ rollConfig, onUpdate, onDelete }: RollBoxInput) {
         rollConfig.type === RollType.attack
         ? (
           <div className="second-row">
-            <label>
+            { /* <label>
               Advantage
               <input 
                 type="checkbox" 
                 checked={rollConfig.advantage}
                 onChange={handleAdvantageChange}
               ></input>
-            </label>
+            </label> */ }
+            <select value={rollConfig.modifier} onChange={handleAdvantageChange}>
+              {rollModifiers.map(([key, value]) => 
+                <option key={key} value={key}>{value}</option>
+              )}
+            </select>
           </div>
         )
         : (
