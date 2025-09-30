@@ -3,13 +3,15 @@ import { AttackConfig } from "../../models/AttackConfig.interface";
 import { Attack } from "../attack/Attack";
 import { ReportChart } from "../report-chart/ReportChart";
 import "./Round.css"
-import { RoundInput } from "./RoundInput.interface";
+import { ThemeToggle } from "../theme-toggle/ThemeToggle";
 
-export function Round({ roundCount, minAc, maxAc }: RoundInput) {
-
-  const [showResults, setshowResults] = useState(false);
+export function Round() {
 
   const [attacks, setAttacks] = useState<AttackConfig[]>([new AttackConfig()]);
+  const [roundCount, setRoundCount] = useState<number>(1000);
+  const [showResults, setshowResults] = useState(true);
+  const [minAc, setMinAc] = useState(10);
+  const [maxAc, setMaxAc] = useState(20);
 
   function createAttack() {
     setAttacks([...attacks, new AttackConfig()]);
@@ -26,6 +28,18 @@ export function Round({ roundCount, minAc, maxAc }: RoundInput) {
     anchorElement.setAttribute('href', dataStr);
     anchorElement.setAttribute('download', 'attacks.json');
     anchorElement.click();
+  }
+
+  function handleMaxAcChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setMaxAc(Number.parseInt(e.currentTarget.value));
+  }
+
+  function handleMinAcChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setMinAc(Number.parseInt(e.currentTarget.value));
+  }
+  
+  function handleRoundCountChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setRoundCount(Number.parseInt(e.currentTarget.value));
   }
 
   function importConfig() {
@@ -60,13 +74,52 @@ export function Round({ roundCount, minAc, maxAc }: RoundInput) {
   return (
     <div className="round-col">
       <div className="round-row">
-        <button onClick={exportConfig}>Export</button>
-        <button onClick={importConfig} className="button-gap">Import</button>
-        <button onClick={createAttack}>Add Attack</button>
-        <button onClick={reset}>Reset</button>
-        <button onClick={toggleCharts}>{showResults ? 'Hide Results' : 'Show Results'}</button>
+        <div className="input-row">
+          <label>
+            Round Count: 
+            <input 
+              min="0"
+              max="9999" 
+              type="number" 
+              value={roundCount}
+              placeholder="Round Count"
+              onChange={handleRoundCountChange}
+              className="small-input"
+            ></input>
+          </label>
+          <label>
+            Min AC:
+            <input
+              min="0"
+              type="number"
+              value={minAc}
+              placeholder="Min AC"
+              onChange={handleMinAcChange}
+              className="small-input"
+            ></input>
+          </label>
+          <label>
+            Max AC:
+            <input
+              min="0"
+              type="number"
+              value={maxAc}
+              placeholder="Max AC"
+              onChange={handleMaxAcChange}
+              className="small-input"
+            ></input>
+          </label>
+        </div>
+        <div className="button-row">
+          <button onClick={createAttack}>Add Attack</button>
+          <button onClick={reset}>Reset</button>
+          <button onClick={toggleCharts}>{showResults ? 'Hide Results' : 'Show Results'}</button>
+          <button onClick={exportConfig} className="button-gap">Export</button>
+          <button onClick={importConfig}>Import</button>
+        </div>
+        <ThemeToggle></ThemeToggle>
       </div>
-      <div className="round-col">
+      <div className="inner-round-col">
         {attacks.map(attack =>
           <Attack key={attack.id} attackConfig={attack} onUpdate={updateAttack} onDelete={deleteAttack}></Attack>
         )}

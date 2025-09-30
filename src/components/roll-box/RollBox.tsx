@@ -2,6 +2,7 @@ import "./RollBox.css";
 import { RollBoxInput } from "./RollboxInput.interface";
 import { RollType } from "../../models/RollType.enum";
 import { DamageType } from "../../models/DamageType.enum";
+import { BsFillTrash3Fill } from "react-icons/bs";
 
 const diceSizes = new Map<string, number>([
   ['d4', 4], 
@@ -112,7 +113,14 @@ export function RollBox({ rollConfig, onUpdate, onDelete }: RollBoxInput) {
                 <option key={key} value={key}>{value}</option>
               )}
             </select>
-            <button onClick={remove}>Remove</button>
+            <button 
+              onClick={remove} 
+              className="icon-button"
+              aria-label="Remove Damage Roll"
+              title="Remove Damage Roll"
+            >
+              <BsFillTrash3Fill />
+            </button>
           </div>
         )
       }

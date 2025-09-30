@@ -1,7 +1,5 @@
 .rollbox {
   padding: 0.5rem;
-  /* border: 1px solid gray; */
-  /* border-radius: 1rem; */
   gap: 0.5rem;
   width: fit-content;
   box-shadow: 1px 1px 2px 1px grey;
@@ -11,7 +9,7 @@
 .first-row {
   display: flex;
   flex-direction: row;
-  gap: 0.5rem;
+  gap: 0.25rem;
   margin-bottom: 0.5rem;
 }
 
@@ -24,7 +22,7 @@
 }
 
 .count-input {
-  width: 7ch;
+  width: 3ch;
   text-align: right;
 }
 

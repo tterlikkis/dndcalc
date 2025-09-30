@@ -19,6 +19,10 @@ const colors: string[] = [
   "brown",
   "pink"
 ];
+const tooltipStyle = { color: '#000022' };
+const dprFormatter = (value: number) => `${value} dpr`;
+const percentFormatter = (value: number) => `${value}%`;
+const acFormatter = (value: number) => `AC ${value}`;
 
 export function ReportChart({ showResults, attacks, roundCount, minAc, maxAc }: ReportChartInput) {
 
@@ -118,70 +122,7 @@ export function ReportChart({ showResults, attacks, roundCount, minAc, maxAc }: 
   return (
     <div className="chart-row">
       <div className="chart-column">
-        <div className="chart-title">
-          <div className="chart-title-text">Damager Per Round</div>
-          {
-            attacks.length > 1
-            ? (
-              <label>
-                Display Round Total
-                <input type="checkbox" checked={showTotalDamage} onChange={handleShowTotalDamageChange} />
-              </label>
-            )
-            : null
-          }
-        </div>
-        <LineChart width={chartWidth} height={200} data={chartData}>
-          <CartesianGrid />
-          {attacks.map((attack, index) =>
-            <Line 
-              key={attack.id}
-              dataKey={`averageDamage${attack.id}`} 
-              type="monotone" 
-              stroke={colors[index % colors.length]} 
-              strokeWidth={2} 
-              name={`Attack ${index+1} Avg Dmg per Round`}
-            ></Line>     
-          )}
-          {
-            attacks.length > 1 && showTotalDamage
-            ? (
-              <Line
-                dataKey="averageDamage"
-                type="monotone"
-                stroke="grey"
-                strokeWidth={2}
-                name="Total Avg Dmg per Round"
-              ></Line>
-            )
-            : null
-          }
-          <XAxis dataKey="ac" />
-          <YAxis />
-          <Tooltip />
-        </LineChart>
-        <div className="chart-title">
-          <div className="chart-title-text">Hit Percentage</div>
-        </div>
-        <LineChart width={chartWidth} height={200} data={chartData}>
-          <CartesianGrid />
-          {attacks.map((attack, index) =>
-            <Line 
-              key={attack.id}
-              dataKey={`hitPercentage${attack.id}`} 
-              type="monotone" 
-              stroke={colors[index + 2 % colors.length]} 
-              strokeWidth={2} 
-              name={`Attack ${index+1} Hit Percentage`}
-            ></Line>
-          )}
-          <XAxis dataKey="ac" />
-          <YAxis />
-          <Tooltip />
-        </LineChart>
-      </div>
-      <div className="chart-column">
-        <table className="chart-table">
+        <table>
           <thead>
             <tr>
               <th>Attack #</th>
@@ -202,6 +143,70 @@ export function ReportChart({ showResults, attacks, roundCount, minAc, maxAc }: 
           </tbody>
         </table>
       </div>
+      <div className="chart-column">
+        <div className="chart-title">
+          <div className="chart-title-text">Chance to Hit</div>
+        </div>
+        <LineChart width={chartWidth} height={200} data={chartData}>
+          <CartesianGrid />
+          {attacks.map((attack, index) =>
+            <Line 
+              key={attack.id}
+              dataKey={`hitPercentage${attack.id}`} 
+              type="monotone" 
+              stroke={colors[index + 2 % colors.length]} 
+              strokeWidth={2} 
+              name={`Attack ${index+1}`}
+            ></Line>
+          )}
+          <XAxis dataKey="ac" />
+          <YAxis />
+          <Tooltip labelStyle={tooltipStyle} formatter={percentFormatter} labelFormatter={acFormatter} />
+        </LineChart>
+        <div className="chart-title">
+          <div className="chart-title-text">Average Damage Per Round</div>
+          {
+            attacks.length > 1
+            ? (
+              <label>
+                Display Round Total
+                <input type="checkbox" checked={showTotalDamage} onChange={handleShowTotalDamageChange} />
+              </label>
+            )
+            : null
+          }
+        </div>
+        <LineChart width={chartWidth} height={200} data={chartData}>
+          <CartesianGrid />
+          {attacks.map((attack, index) =>
+            <Line 
+              key={attack.id}
+              dataKey={`averageDamage${attack.id}`} 
+              type="monotone" 
+              stroke={colors[index % colors.length]} 
+              strokeWidth={2} 
+              name={`Attack ${index+1}`}
+            ></Line>     
+          )}
+          {
+            attacks.length > 1 && showTotalDamage
+            ? (
+              <Line
+                dataKey="averageDamage"
+                type="monotone"
+                stroke="grey"
+                strokeWidth={2}
+                name="Total"
+              ></Line>
+            )
+            : null
+          }
+          <XAxis dataKey="ac" />
+          <YAxis />
+          <Tooltip labelStyle={tooltipStyle} formatter={dprFormatter} labelFormatter={acFormatter} />
+        </LineChart>
+      </div>
+
     </div>
   );
 }

@@ -1,5 +1,6 @@
 .theme-dark {
   --background: #181a1b;
+  --midground: #262525;
   --foreground: #202324;
   --text: #e8e6e3;
   --button-background: #2b2a33;
@@ -8,6 +9,8 @@
 
 .theme-light {
   --background: #ffffff;
+  /* --midground: #fff9f5; */
+  --midground: #eeeeee;
   --foreground: #cccccc;
   --text: #000022;
   --button-background: #e9e9ed;
@@ -17,6 +20,18 @@
 html, #root {
   background-color: var(--background);
   color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
 }
 
 input {
@@ -64,4 +79,8 @@ button:hover {
   justify-content: space-between;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
+}
+
+.icon-button {
+  padding-top: 4px;
 }

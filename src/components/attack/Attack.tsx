@@ -3,6 +3,7 @@ import { RollConfig } from "../../models/RollConfig.class";
 import { RollType } from "../../models/RollType.enum";
 import { RollBox } from "../roll-box/RollBox";
 import { AttackInput } from "./AttackInput.interface";
+import { BsFillTrash3Fill, BsPlusLg } from "react-icons/bs";
 import "./Attack.css"
 
 
@@ -62,8 +63,22 @@ export function Attack({ attackConfig, onUpdate, onDelete }: AttackInput) {
         ></RollBox>  
       )}
       <div className="attack-col">
-        <button onClick={createDamageRoll}>Add Damage Roll</button>
-        <button onClick={deleteAttack}>Remove Attack</button>
+        <button 
+          onClick={createDamageRoll} 
+          className="icon-button" 
+          aria-label="Add Damage Roll"
+          title="Add Damage Roll"
+        >
+          <BsPlusLg />
+        </button>
+        <button 
+          onClick={deleteAttack} 
+          className="icon-button"
+          aria-label="Remove Attack"
+          title="Remove Attack"
+        >
+          <BsFillTrash3Fill />
+        </button>
       </div>
     </div>
   )
