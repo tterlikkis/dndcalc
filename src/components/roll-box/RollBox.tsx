@@ -96,7 +96,7 @@ export function RollBox({ rollConfig, onUpdate, onDelete }: RollBoxInput) {
         />
       </div>
       { 
-        rollConfig.type === RollType.attack
+        rollConfig.type === RollType.Attack
         ? (
           <div className="second-row">
             <select value={rollConfig.modifier} onChange={handleAdvantageChange}>

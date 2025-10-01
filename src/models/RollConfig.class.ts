@@ -1,6 +1,6 @@
 import { DamageType } from "./DamageType.enum";
 import { RollModifier } from "./RollModifier.enum";
-import { RollResult } from "./RollResult";
+import { RollResult } from "./RollResult.interface";
 import { RollType } from "./RollType.enum";
 
 export class RollConfig {
@@ -12,20 +12,19 @@ export class RollConfig {
   bonus?: number;
   damage?: DamageType;
   modifier: RollModifier;
-  // advantage: boolean = false;
 
   constructor(type?: RollType) {
     this.id = crypto.randomUUID();
-    this.type = type || RollType.attack;
+    this.type = type || RollType.Attack;
     this.modifier = RollModifier.Normal;
-    if (this.type == RollType.attack) {
+    if (this.type == RollType.Attack) {
       this.count = 1;
       this.dice = 20;
     }
-    else if (this.type == RollType.damage) {
+    else if (this.type == RollType.Damage) {
       this.count = 1;
       this.dice = 8;
-      this.damage = DamageType.slashing;
+      this.damage = DamageType.Slashing;
     }
   }
 

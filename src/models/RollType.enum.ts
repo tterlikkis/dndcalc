@@ -1,4 +1,4 @@
 export enum RollType {
-  'attack',
-  'damage'
+  'Attack',
+  'Damage'
 }

@@ -1,4 +1,4 @@
-export interface RoundResult {
+export interface AttackResult {
   attackId: string;
   ac: number;
   averageDamage: number;

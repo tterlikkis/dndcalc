@@ -7,7 +7,7 @@ import { AttackConfig } from "../../models/AttackConfig.interface";
 import { round } from "../../utilities/round";
 import { sum } from "../../utilities/sum";
 import { useMemo, useState } from "react";
-import { RoundResult } from "../../models/RoundResult.interface";
+import { AttackResult } from "../../models/AttackResult.interface";
 
 const chartWidth = 600;
 const colors: string[] = [
@@ -71,7 +71,7 @@ export function ReportChart({ showResults, attacks, roundCount, minAc, maxAc }: 
     setShowTotalDamage(!showTotalDamage);
   }
 
-  function rollAttack(ac: number, attack: AttackConfig): RoundResult {
+  function rollAttack(ac: number, attack: AttackConfig): AttackResult {
     let critSuccessCount = 0;
     let critFailureCount = 0;
     const totals = Array.from(Array(roundCount || 0).keys()).map(() => {
@@ -111,7 +111,7 @@ export function ReportChart({ showResults, attacks, roundCount, minAc, maxAc }: 
     };    
   }
 
-  function runSimulation(): RoundResult[] {
+  function runSimulation(): AttackResult[] {
     return acArray.flatMap(ac =>
       attacks.map(a => rollAttack(ac, a))
     );

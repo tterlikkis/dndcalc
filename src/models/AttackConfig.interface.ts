@@ -8,7 +8,7 @@ export class AttackConfig {
 
   constructor(attackRoll?: RollConfig, damageRolls?: RollConfig[]) {
     this.id = crypto.randomUUID();
-    this.attackRoll = attackRoll || new RollConfig(RollType.attack);
-    this.damageRolls = damageRolls || [new RollConfig(RollType.damage)];
+    this.attackRoll = attackRoll || new RollConfig(RollType.Attack);
+    this.damageRolls = damageRolls || [new RollConfig(RollType.Damage)];
   }
 }
