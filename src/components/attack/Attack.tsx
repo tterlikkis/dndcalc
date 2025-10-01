@@ -12,7 +12,7 @@ export function Attack({ attackConfig, onUpdate, onDelete }: AttackInput) {
   function createDamageRoll()  {
     const newAttackConfig: AttackConfig = {
       ...attackConfig,
-      damageRolls: [...attackConfig.damageRolls, new RollConfig(RollType.damage)]
+      damageRolls: [...attackConfig.damageRolls, new RollConfig(RollType.Damage)]
     }
     onUpdate(newAttackConfig);
   }
