@@ -1,14 +1,14 @@
+.attack-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+}
+
 .attack-row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
-}
-
-.attack-col {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  gap: 0.5rem;
 }

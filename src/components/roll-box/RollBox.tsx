@@ -99,14 +99,6 @@ export function RollBox({ rollConfig, onUpdate, onDelete }: RollBoxInput) {
         rollConfig.type === RollType.attack
         ? (
           <div className="second-row">
-            { /* <label>
-              Advantage
-              <input 
-                type="checkbox" 
-                checked={rollConfig.advantage}
-                onChange={handleAdvantageChange}
-              ></input>
-            </label> */ }
             <select value={rollConfig.modifier} onChange={handleAdvantageChange}>
               {rollModifiers.map(([key, value]) => 
                 <option key={key} value={key}>{value}</option>

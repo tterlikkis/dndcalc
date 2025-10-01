@@ -121,7 +121,7 @@ export function ReportChart({ showResults, attacks, roundCount, minAc, maxAc }: 
 
   return (
     <div className="chart-row">
-      <div className="chart-column">
+      <div className="chart-col">
         <table>
           <thead>
             <tr>
@@ -143,7 +143,7 @@ export function ReportChart({ showResults, attacks, roundCount, minAc, maxAc }: 
           </tbody>
         </table>
       </div>
-      <div className="chart-column">
+      <div className="chart-col">
         <div className="chart-title">
           <div className="chart-title-text">Chance to Hit</div>
         </div>
