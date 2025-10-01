@@ -74,7 +74,7 @@ export function ReportChart({ showResults, attacks, roundCount, minAc, maxAc }: 
   function rollAttack(ac: number, attack: AttackConfig): RoundResult {
     let critSuccessCount = 0;
     let critFailureCount = 0;
-    const totals = Array.from(Array(roundCount).keys()).map(() => {
+    const totals = Array.from(Array(roundCount || 0).keys()).map(() => {
       const roll = RollConfig.roll(attack.attackRoll);
       // Crit success
       if (roll.base === attack.attackRoll.dice) {
@@ -133,7 +133,7 @@ export function ReportChart({ showResults, attacks, roundCount, minAc, maxAc }: 
           </thead>
           <tbody>
             {tableData.map((t, i) =>
-              <tr key={i + 1}>
+              <tr key={t.attackId}>
                 <td>{i + 1}</td>
                 <td>{t.averageHitDamage}</td>
                 <td>{t.critSuccessPercentage}</td>
