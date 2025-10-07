@@ -1,13 +1,11 @@
 import { ChangeEventHandler, MouseEventHandler } from "react";
-import { StatBlock } from "../../models/StatBlock.interface";
+import { StatBlock } from "../../models/StatBlock.type";
 
 export interface HeaderInput {
   roundCount: number;
   minAc: number;
   maxAc: number;
   showResults: boolean;
-  statBlock: StatBlock;
-  handleStatBlockChange: Function;
   handleRoundCountChange: ChangeEventHandler<HTMLInputElement>;
   handleMinAcChange: ChangeEventHandler<HTMLInputElement>;
   handleMaxAcChange: ChangeEventHandler<HTMLInputElement>;

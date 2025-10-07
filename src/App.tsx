@@ -6,18 +6,15 @@ import { AttackConfig } from "./models/AttackConfig.interface";
 import { Attack } from "./components/attack/Attack";
 import { ReportChart } from "./components/report-chart/ReportChart";
 import { Header } from "./components/header/Header";
-import { StatBlock } from "./models/StatBlock.interface";
-
-const DEFAULT_STATS: StatBlock = { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 };
+import { StatTracker } from "./components/stat-tracker/StatTracker";
 
 export default function App() {
 
   useEffect(() => { keepTheme(); });
 
   const [attacks, setAttacks] = useState<AttackConfig[]>([new AttackConfig()]);
-  const [statBlock, setStatBlock] = useState<StatBlock>(DEFAULT_STATS);
   const [roundCount, setRoundCount] = useState<number>(1000);
-  const [showResults, setshowResults] = useState(true);
+  const [showResults, setshowResults] = useState(false);
   const [minAc, setMinAc] = useState(10);
   const [maxAc, setMaxAc] = useState(20);
 
@@ -86,8 +83,6 @@ export default function App() {
         minAc={minAc}
         maxAc={maxAc}
         showResults={showResults}
-        statBlock={statBlock}
-        handleStatBlockChange={setStatBlock}
         handleRoundCountChange={handleRoundCountChange}
         handleMinAcChange={handleMinAcChange}
         handleMaxAcChange={handleMaxAcChange}
@@ -105,6 +100,7 @@ export default function App() {
       <ReportChart showResults={showResults} attacks={attacks} roundCount={roundCount} minAc={minAc} maxAc={maxAc} />
       <a id="downloadAnchorElement" hidden></a>
       <input type="file" id="uploadAnchorElement" hidden accept="application/JSON" onChange={onFileUpload}></input>
+      <StatTracker></StatTracker>
     </div>
   );
 
