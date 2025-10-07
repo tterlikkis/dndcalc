@@ -1,0 +1,49 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+  -moz-appearance:textfield; /* Firefox */
+  appearance:textfield;
+}
+
+input {
+  color: #eeeeee
+}
+
+body {
+  background-color: #1f1f1f;
+  color: #6b6b6b
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.tracker {
+  width: 6rem;
+  height: 3rem;
+  border: 1px solid #6b6b6b;
+  box-sizing: border-box;
+}
+
+.value-input {
+  max-width: 97%;
+  border: none;
+  outline: none;
+  border-top: 1px solid #6b6b6b;
+  background: transparent;
+}
+
+.name-input {
+  max-width: 97%;
+  border: none;
+  outline: none;
+  background: transparent;
+  text-align: center;
+}

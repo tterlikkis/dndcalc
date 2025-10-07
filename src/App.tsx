@@ -3,15 +3,19 @@ import "./styles.css"
 import { useEffect, useState } from "react";
 import { keepTheme } from "./utilities/themes";
 import { AttackConfig } from "./models/AttackConfig.interface";
-import { ThemeToggle } from "./components/theme-toggle/ThemeToggle";
 import { Attack } from "./components/attack/Attack";
 import { ReportChart } from "./components/report-chart/ReportChart";
+import { Header } from "./components/header/Header";
+import { StatBlock } from "./models/StatBlock.interface";
+
+const DEFAULT_STATS: StatBlock = { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 };
 
 export default function App() {
 
   useEffect(() => { keepTheme(); });
 
   const [attacks, setAttacks] = useState<AttackConfig[]>([new AttackConfig()]);
+  const [statBlock, setStatBlock] = useState<StatBlock>(DEFAULT_STATS);
   const [roundCount, setRoundCount] = useState<number>(1000);
   const [showResults, setshowResults] = useState(true);
   const [minAc, setMinAc] = useState(10);
@@ -77,52 +81,22 @@ export default function App() {
 
   return (
     <div className="app-col">
-      <div className="app-row">
-        <div className="input-row">
-          <label>
-            Round Count: 
-            <input 
-              min="0"
-              max="9999" 
-              type="number" 
-              value={roundCount}
-              placeholder="Round Count"
-              onChange={handleRoundCountChange}
-              className="small-input"
-            ></input>
-          </label>
-          <label>
-            Min AC:
-            <input
-              min="0"
-              type="number"
-              value={minAc}
-              placeholder="Min AC"
-              onChange={handleMinAcChange}
-              className="small-input"
-            ></input>
-          </label>
-          <label>
-            Max AC:
-            <input
-              min="0"
-              type="number"
-              value={maxAc}
-              placeholder="Max AC"
-              onChange={handleMaxAcChange}
-              className="small-input"
-            ></input>
-          </label>
-        </div>
-        <div className="button-row">
-          <button onClick={createAttack}>Add Attack</button>
-          <button onClick={reset}>Reset</button>
-          <button onClick={toggleCharts}>{showResults ? 'Hide Results' : 'Show Results'}</button>
-          <button onClick={exportConfig} className="button-gap">Export</button>
-          <button onClick={importConfig}>Import</button>
-        </div>
-        <ThemeToggle></ThemeToggle>
-      </div>
+      <Header
+        roundCount={roundCount}
+        minAc={minAc}
+        maxAc={maxAc}
+        showResults={showResults}
+        statBlock={statBlock}
+        handleStatBlockChange={setStatBlock}
+        handleRoundCountChange={handleRoundCountChange}
+        handleMinAcChange={handleMinAcChange}
+        handleMaxAcChange={handleMaxAcChange}
+        createAttack={createAttack}
+        reset={reset}
+        toggleCharts={toggleCharts}
+        exportConfig={exportConfig}
+        importConfig={importConfig}
+      ></Header>
       <div className="inner-app-col">
         {attacks.map(attack =>
           <Attack key={attack.id} attackConfig={attack} onUpdate={updateAttack} onDelete={deleteAttack}></Attack>

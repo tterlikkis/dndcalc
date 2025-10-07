@@ -1,0 +1,31 @@
+.button-gap {
+  margin-left: 1rem;
+}
+
+.button-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.header-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+}
+
+.small-input {
+  width: 4ch;
+  margin-left: 0.25rem;
+}

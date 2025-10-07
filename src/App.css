@@ -44,3 +44,11 @@
   width: 4ch;
   margin-left: 0.25rem;
 }
+
+.stat-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 0.5rem;
+}
