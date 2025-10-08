@@ -11,8 +11,8 @@ function statBlockReducer(
     value: number
   }
 ) {
-  const newBlock: StatBlock = { ...statBlock };
-  newBlock[action.type] = action.value;
+  const newBlock: StatBlock = { ...statBlock, [action.type]: action.value };
+  // newBlock[action.type] = action.value;
   return newBlock;
 }
 

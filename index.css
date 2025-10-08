@@ -1,15 +1,3 @@
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  /* display: none; <- Crashes Chrome on hover */
-  -webkit-appearance: none;
-  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-}
-
-input[type=number] {
-  -moz-appearance:textfield; /* Firefox */
-  appearance:textfield;
-}
-
 input {
   color: #eeeeee
 }
@@ -23,6 +11,7 @@ body {
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  margin-top: 0.25rem;
 }
 
 .tracker {
@@ -32,18 +21,93 @@ body {
   box-sizing: border-box;
 }
 
+.tracker-box {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  z-index: 1001;
+}
+
 .value-input {
   max-width: 97%;
   border: none;
   outline: none;
   border-top: 1px solid #6b6b6b;
-  background: transparent;
+  background-color: #1f1f1f;
+  text-align: center;
+  font-size: larger;
 }
 
 .name-input {
   max-width: 97%;
   border: none;
   outline: none;
-  background: transparent;
-  text-align: center;
+  background-color: #1f1f1f;
+}
+
+.stream-backdrop {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #1f1f1f;
+  color: #8a8a8a;
+}
+
+.no-images {
+  height: 100%;
+  width: 100%;
+}
+
+.text {
+  font-size: x-large;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.empty-img {
+  margin-top: 20px;
+  height: 490.5px;
+  width: 548.75px;
+}
+
+.left-arrow-holder {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  width: 96px;
+}
+
+/* .left-arrow-holder:hover>.left-arrow {
+  display: block;
+  cursor: pointer;
+} */
+
+.left-arrow {
+  background-image: url("./chevron-left-svgrepo-com.svg");
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+.right-arrow-holder {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  width: 96px;
+}
+
+/* .right-arrow-holder:hover>.right-arrow {
+  display: block;
+  cursor: pointer;
+} */
+
+.right-arrow {
+  background-image: url("./chevron-right-svgrepo-com.svg");
+  display: none;
+  width: 100%;
+  height: 100%;
 }
